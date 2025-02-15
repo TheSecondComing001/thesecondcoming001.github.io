@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FF6B35; /* 橙色背景 */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.blog-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background-color: #ffffff; /* 按钮背景白色 */
+    color: #ff6600; /* 橙色文字 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.blog-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.blog-button:active {
+    transform: translateY(0);
+}
+
+/* 移动设备适配 */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .blog-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}
