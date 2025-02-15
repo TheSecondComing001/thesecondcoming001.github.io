@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>橙子博客</title>
+    <style>
+        :root {
+            --primary-color: #FF6F61;  /* 主橙色 */
+            --secondary-color: #FFA577;  /* 辅助橙色 */
+            --background-color: #FFF5E6;  /* 米白背景 */
+            --text-color: #333333;  /* 主要文字颜色 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        /* 导航样式 */
+        .navbar {
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* 主要内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        /* 文章卡片 */
+        .post-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .post-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .post-title {
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand">橙子博客</a>
+            <div class="nav-links">
+                <a href="#">首页</a>
+                <a href="#">归档</a>
+                <a href="#">关于</a>
+                <a href="#">联系</a>
+            </div>
+            <div class="menu-toggle">☰</div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <article class="post-card">
+            <div class="post-date">2024年3月15日</div>
+            <h2 class="post-title">我的第一篇博客文章</h2>
+            <p>这里是文章的摘要内容，简要描述文章的主要内容...</p>
+            <a href="#" class="read-more">阅读更多</a>
+        </article>
+
+        <article class="post-card">
+            <div class="post-date">2024年3月14日</div>
+            <h2 class="post-title">关于这个博客的创建</h2>
+            <p>记录搭建个人博客的过程和技术选择...</p>
+            <a href="#" class="read-more">阅读更多</a>
+        </article>
+    </main>
+
+    <footer>
+        <p>© 2024 橙子博客 - 由GitHub Pages托管</p>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
