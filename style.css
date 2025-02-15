@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #FF6B35; /* 橙色背景 */
+    background-color: #FFA577; /* 橙色背景 */
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,7 @@ body {
 .title {
     text-align: center;
     margin-bottom: 2rem;
-    color: white;
+    color: #FF6F61;
     font-size: 3rem;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
@@ -26,8 +26,8 @@ body {
 .blog-button {
     padding: 1rem 2rem;
     font-size: 1.2rem;
-    background-color: #ffffff; /* 按钮背景白色 */
-    color: #ff6600; /* 橙色文字 */
+    background-color: #FF6F61; /* 按钮背景白色 */
+    color: #FFA577; /* 橙色文字 */
     border: none;
     border-radius: 5px;
     cursor: pointer;
