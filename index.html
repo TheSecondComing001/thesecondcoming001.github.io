@@ -1,13 +1,229 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的博客</title>
-    <link rel="stylesheet" href="style.css">
+    <title>作品展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #1a4b7a;
+            --secondary-blue: #3498db;
+            --background: #f5f7fa;
+        }
+
+        body {
+            background-color: var(--background);
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        nav {
+            background: white;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: flex-end;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--secondary-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            position: relative;
+            padding-top: 100%;
+            background: #ddd;
+        }
+
+        .project-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .project-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+
+        .project-link {
+            flex: 1;
+            text-align: center;
+            background: var(--secondary-blue);
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .project-link.source {
+            background: #2c3e50;
+        }
+
+        .project-link:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1 class="title">我的个人博客</h1>
-    <a href="homepage" class="blog-button">进入博客</a>
+    <nav>
+        <ul>
+            <li><a href="#home">首页</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>我的HTML作品集</h1>
+        <p>探索我最近的创作项目</p>
+
+        <div class="project-grid">
+            <!-- 项目1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/600/600" alt="登录页面预览">
+                </div>
+                <div class="project-info">
+                    <h3>2048小游戏</h3>
+                    <p>益智游戏，在滑动间得到2048</p>
+                    <div class="button-group">
+                        <a href="assets/2048_Game" class="project-link">在线体验</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 项目2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://picsum.photos/601/601" alt="电商页面预览">
+                </div>
+                <div class="project-info">
+                    <h3>电商产品页面</h3>
+                    <p>商品展示页面，包含图片轮播和规格选择</p>
+                    <div class="button-group">
+                        <a href="demo-ecommerce.html" class="project-link">在线体验</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 页面加载动画
+        window.addEventListener('load', () => {
+            document.body.style.opacity = 1;
+        });
+    </script>
 </body>
 </html>

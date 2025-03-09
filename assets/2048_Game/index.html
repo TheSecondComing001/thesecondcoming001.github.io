@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2048 Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #faf8ef;
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background-color: #bbada0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .cell {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(238, 228, 218, 0.35);
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #776e65;
+        }
+
+        .number {
+            background-color: #eee4da;
+        }
+
+        .number-2 { background-color: #eee4da; }
+        .number-4 { background-color: #ede0c8; }
+        .number-8 { background-color: #f2b179; color: #f9f6f2; }
+        .number-16 { background-color: #f59563; color: #f9f6f2; }
+        .number-32 { background-color: #f67c5f; color: #f9f6f2; }
+        .number-64 { background-color: #f65e3b; color: #f9f6f2; }
+        .number-128 { background-color: #edcf72; color: #f9f6f2; }
+        .number-256 { background-color: #edcc61; color: #f9f6f2; }
+        .number-512 { background-color: #edc850; color: #f9f6f2; }
+        .number-1024 { background-color: #edc53f; color: #f9f6f2; }
+        .number-2048 { background-color: #edc22e; color: #f9f6f2; }
+
+        #score {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>2048</h1>
+    <div id="score">Score: 0</div>
+    <div id="game-board"></div>
+
+    <script>
+        class Game {
+            constructor() {
+                this.board = Array(4).fill().map(() => Array(4).fill(0));
+                this.score = 0;
+                this.setupBoard();
+                this.addNewNumber();
+                this.addNewNumber();
+                this.setupEventListeners();
+                this.updateDisplay();
+            }
+
+            setupBoard() {
+                const boardElement = document.getElementById('game-board');
+                for (let i = 0; i < 16; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    boardElement.appendChild(cell);
+                }
+            }
+
+            addNewNumber() {
+                const emptyCells = [];
+                this.board.forEach((row, i) => {
+                    row.forEach((cell, j) => {
+                        if (cell === 0) emptyCells.push([i, j]);
+                    });
+                });
+
+                if (emptyCells.length > 0) {
+                    const [i, j] = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                    this.board[i][j] = Math.random() < 0.9 ? 2 : 4;
+                }
+            }
+
+            updateDisplay() {
+                const cells = document.getElementsByClassName('cell');
+                this.board.flat().forEach((value, index) => {
+                    cells[index].className = 'cell' + (value ? ` number number-${value}` : '');
+                    cells[index].textContent = value || '';
+                });
+                document.getElementById('score').textContent = `Score: ${this.score}`;
+            }
+
+            move(direction) {
+                let moved = false;
+                const oldBoard = JSON.stringify(this.board);
+
+                switch(direction) {
+                    case 'ArrowLeft':
+                        moved = this.moveLeft();
+                        break;
+                    case 'ArrowRight':
+                        moved = this.moveRight();
+                        break;
+                    case 'ArrowUp':
+                        moved = this.moveUp();
+                        break;
+                    case 'ArrowDown':
+                        moved = this.moveDown();
+                        break;
+                }
+
+                if (moved) {
+                    this.addNewNumber();
+                    this.updateDisplay();
+                    this.checkGameOver();
+                }
+            }
+
+            moveLeft() {
+                let moved = false;
+                for (let i = 0; i < 4; i++) {
+                    let row = this.board[i].filter(x => x !== 0);
+                    for (let j = 0; j < row.length - 1; j++) {
+                        if (row[j] === row[j + 1]) {
+                            row[j] *= 2;
+                            this.score += row[j];
+                            row.splice(j + 1, 1);
+                            moved = true;
+                        }
+                    }
+                    const newRow = [...row, ...Array(4 - row.length).fill(0)];
+                    if (JSON.stringify(this.board[i]) !== JSON.stringify(newRow)) moved = true;
+                    this.board[i] = newRow;
+                }
+                return moved;
+            }
+
+            moveRight() {
+                let moved = false;
+                for (let i = 0; i < 4; i++) {
+                    let row = this.board[i].filter(x => x !== 0);
+                    for (let j = row.length - 1; j > 0; j--) {
+                        if (row[j] === row[j - 1]) {
+                            row[j] *= 2;
+                            this.score += row[j];
+                            row.splice(j - 1, 1);
+                            moved = true;
+                        }
+                    }
+                    const newRow = [...Array(4 - row.length).fill(0), ...row];
+                    if (JSON.stringify(this.board[i]) !== JSON.stringify(newRow)) moved = true;
+                    this.board[i] = newRow;
+                }
+                return moved;
+            }
+
+            moveUp() {
+                let moved = false;
+                for (let j = 0; j < 4; j++) {
+                    let column = this.board.map(row => row[j]).filter(x => x !== 0);
+                    for (let i = 0; i < column.length - 1; i++) {
+                        if (column[i] === column[i + 1]) {
+                            column[i] *= 2;
+                            this.score += column[i];
+                            column.splice(i + 1, 1);
+                            moved = true;
+                        }
+                    }
+                    const newColumn = [...column, ...Array(4 - column.length).fill(0)];
+                    if (JSON.stringify(this.board.map(row => row[j])) !== JSON.stringify(newColumn)) moved = true;
+                    for (let i = 0; i < 4; i++) {
+                        this.board[i][j] = newColumn[i];
+                    }
+                }
+                return moved;
+            }
+
+            moveDown() {
+                let moved = false;
+                for (let j = 0; j < 4; j++) {
+                    let column = this.board.map(row => row[j]).filter(x => x !== 0);
+                    for (let i = column.length - 1; i > 0; i--) {
+                        if (column[i] === column[i - 1]) {
+                            column[i] *= 2;
+                            this.score += column[i];
+                            column.splice(i - 1, 1);
+                            moved = true;
+                        }
+                    }
+                    const newColumn = [...Array(4 - column.length).fill(0), ...column];
+                    if (JSON.stringify(this.board.map(row => row[j])) !== JSON.stringify(newColumn)) moved = true;
+                    for (let i = 0; i < 4; i++) {
+                        this.board[i][j] = newColumn[i];
+                    }
+                }
+                return moved;
+            }
+
+            checkGameOver() {
+                if (!this.board.flat().includes(0)) {
+                    let gameOver = true;
+                    for (let i = 0; i < 4; i++) {
+                        for (let j = 0; j < 4; j++) {
+                            if ((j < 3 && this.board[i][j] === this.board[i][j + 1]) ||
+                                (i < 3 && this.board[i][j] === this.board[i + 1][j])) {
+                                gameOver = false;
+                            }
+                        }
+                    }
+                    if (gameOver) {
+                        alert('Game Over!');
+                    }
+                }
+            }
+
+            setupEventListeners() {
+                document.addEventListener('keydown', (e) => {
+                    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                        e.preventDefault();
+                        this.move(e.key);
+                    }
+                });
+            }
+        }
+
+        // 启动游戏
+        new Game();
+    </script>
+</body>
+</html>
