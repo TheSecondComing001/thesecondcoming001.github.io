@@ -3,48 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>技术博客 - OrangeTech</title>
-    <link rel="stylesheet" href="style.css">
+    <title>技术博客 | 探索与创造</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <div class="logo">OrangeTech</div>
-        <div class="nav-links">
-            <a href="#">首页</a>
-            <a href="#">归档</a>
-            <a href="#">关于</a>
-            <a href="#">订阅</a>
+    <header>
+        <div class="container">
+            <h1>探索与创造</h1>
+            <p class="tagline">记录技术点滴，分享学习心得</p>
         </div>
-    </nav>
-
+    </header>
+    
     <div class="container">
-        <div class="card-grid">
-            <!-- 示例卡片 1 -->
-            <article class="card">
-                <img src="https://picsum.photos/400/300" alt="技术插图">
-                <div class="tag">前端开发</div>
-                <h2>现代CSS布局技术深度解析</h2>
-                <p>探讨Grid和Flexbox在现代Web开发中的最佳实践，以及如何创建响应式布局...</p>
-                <div class="meta">
-                    <span>2023-10-20</span>
-                    <span>8分钟阅读</span>
+        <nav>
+            <a href="#">首页</a>
+            <a href="#">文章</a>
+            <a href="#">项目</a>
+            <a href="#">关于</a>
+            <a href="#">联系</a>
+        </nav>
+        
+        <div class="posts">
+            <div class="post-card">
+                <div class="post-image">📱</div>
+                <div class="post-content">
+                    <div class="post-date">2023年10月15日</div>
+                    <h3>移动端开发最佳实践</h3>
+                    <p>探讨现代移动应用开发中的核心技术和优化策略...</p>
                 </div>
-            </article>
-
-            <!-- 示例卡片 2 -->
-            <article class="card">
-                <img src="https://picsum.photos/401/300" alt="技术插图">
-                <div class="tag">JavaScript</div>
-                <h2>ES2023新特性实践指南</h2>
-                <p>详细解读最新ECMAScript规范中的数组搜索方法和WeakMap增强功能...</p>
-                <div class="meta">
-                    <span>2023-10-18</span>
-                    <span>6分钟阅读</span>
+            </div>
+            
+            <div class="post-card">
+                <div class="post-image">🔧</div>
+                <div class="post-content">
+                    <div class="post-date">2023年9月28日</div>
+                    <h3>自动化测试框架搭建</h3>
+                    <p>从零开始构建高效的前端自动化测试体系...</p>
                 </div>
-            </article>
-
-            <!-- 更多卡片... -->
+            </div>
+            
+            <div class="post-card">
+                <div class="post-image">🚀</div>
+                <div class="post-content">
+                    <div class="post-date">2023年9月10日</div>
+                    <h3>性能优化实战</h3>
+                    <p>网站性能优化的关键指标和实用技巧...</p>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <footer>
+        <p>© 2023 技术博客 | 由 ❤️ 驱动</p>
+    </footer>
 </body>
 </html>
